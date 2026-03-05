@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio · Administrative & Digital Support Professional</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --cream: #faf6f1;
+      --warm-white: #fff9f4;
+      --rose: #c9837a;
+      --rose-light: #e8b5b0;
+      --rose-dark: #a05d55;
+      --terracotta: #b8705a;
+      --sand: #d4b896;
+      --text: #2c2220;
+      --muted: #7a6560;
+      --border: #e8ddd6;
+      --surface: #f5ede6;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--cream);
+      color: var(--text);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      padding: 20px 56px;
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(250,246,241,0.93);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* HERO DECO (replaces old visual frame) */
+    .hero-deco {
+      position: relative;
+      display: flex; flex-direction: column; justify-content: center;
+      gap: 0; padding: 48px 0 48px 48px;
+    }
+    .hero-deco-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; font-weight: 300;
+      font-size: clamp(56px, 7vw, 96px);
+      line-height: 0.95; letter-spacing: -2px;
+      color: var(--rose-dark); opacity: 0.18;
+      user-select: none; pointer-events: none;
+    }
+    .hero-deco-cards {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      display: flex; flex-direction: column; gap: 12px; left: 48px; right: 0;
+    }
+    .deco-card {
+      background: white; border: 1px solid var(--border);
+      padding: 18px 22px; display: flex; align-items: center; gap: 14px;
+      box-shadow: 0 2px 12px rgba(160,93,85,0.06);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .deco-card:hover { transform: translateX(4px); box-shadow: 0 4px 20px rgba(160,93,85,0.1); }
+    .deco-card-icon {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: var(--surface); border: 1px solid var(--rose-light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; flex-shrink: 0;
+    }
+    .deco-card-text {}
+    .deco-card-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
+    .deco-card-value { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 500; color: var(--text); }
+    .hero-open-badge {
+      position: absolute; bottom: 24px; right: 0;
+      background: var(--rose-dark); color: white;
+      padding: 10px 18px; font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase;
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; font-size: 20px; font-weight: 400;
+      color: var(--rose-dark); letter-spacing: 1px;
+    }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-size: 10px; font-weight: 400; letter-spacing: 2.5px;
+      text-transform: uppercase; color: var(--muted);
+      text-decoration: none; transition: color 0.25s;
+    }
+    .nav-links a:hover { color: var(--rose-dark); }
+    .nav-cta {
+      font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+      padding: 10px 22px; background: var(--rose-dark); color: white;
+      text-decoration: none; transition: background 0.25s;
+    }
+    .nav-cta:hover { background: var(--terracotta); }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      display: grid; grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      padding: 100px 56px 60px;
+      max-width: 1200px; margin: 0 auto; gap: 64px;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 12px;
+      font-size: 10px; letter-spacing: 3.5px; text-transform: uppercase; color: var(--rose);
+      margin-bottom: 28px;
+      opacity: 0; animation: fadeUp 0.8s ease forwards 0.1s;
+    }
+    .hero-tag::before { content: ''; width: 32px; height: 1px; background: var(--rose-light); }
+    .hero-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300; font-size: clamp(40px, 5.5vw, 72px);
+      line-height: 1.08; letter-spacing: -0.5px; margin-bottom: 10px;
+      opacity: 0; animation: fadeUp 0.8s ease forwards 0.22s;
+    }
+    .hero-headline em { font-style: italic; color: var(--rose-dark); }
+    .hero-name-line {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; font-size: clamp(20px, 2.5vw, 28px); font-weight: 300;
+      color: var(--rose); letter-spacing: 1px; margin-bottom: 28px;
+      opacity: 0; animation: fadeUp 0.8s ease forwards 0.33s;
+    }
+    .hero-desc {
+      font-size: 14.5px; color: var(--muted); line-height: 1.85;
+      max-width: 460px; margin-bottom: 36px;
+      opacity: 0; animation: fadeUp 0.8s ease forwards 0.46s;
+    }
+    .hero-langs {
+      display: flex; gap: 8px; margin-bottom: 36px;
+      opacity: 0; animation: fadeUp 0.8s ease forwards 0.56s;
+    }
+    .lang-chip {
+      font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 5px 13px; border: 1px solid var(--border); color: var(--muted);
+    }
+    .hero-btns {
+      display: flex; gap: 12px;
+      opacity: 0; animation: fadeUp 0.8s ease forwards 0.66s;
+    }
+    .btn-primary {
+      font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase;
+      padding: 13px 28px; background: var(--rose-dark); color: white;
+      text-decoration: none; transition: all 0.25s; display: inline-block;
+    }
+    .btn-primary:hover { background: var(--terracotta); transform: translateY(-2px); }
+    .btn-ghost {
+      font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase;
+      padding: 12px 28px; border: 1px solid var(--border); color: var(--muted);
+      text-decoration: none; transition: all 0.25s; display: inline-block;
+    }
+    .btn-ghost:hover { border-color: var(--rose); color: var(--rose-dark); transform: translateY(-2px); }
+
+    /* DIVIDER */
+    .divider {
+      display: flex; align-items: center; gap: 14px;
+      padding: 0 56px; max-width: 1100px; margin: 0 auto;
+    }
+    .div-line { flex: 1; height: 1px; background: var(--border); }
+    .div-gem { width: 5px; height: 5px; background: var(--rose-light); transform: rotate(45deg); }
+
+    /* SHARED SECTION STYLES */
+    .section-wrap { max-width: 1100px; margin: 0 auto; padding: 96px 56px; }
+    .eyebrow { font-size: 10px; letter-spacing: 3.5px; text-transform: uppercase; color: var(--rose); margin-bottom: 12px; }
+    .s-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400; font-size: clamp(34px, 4.5vw, 54px);
+      line-height: 1.1; letter-spacing: -0.5px; margin-bottom: 0;
+    }
+    .s-title em { font-style: italic; color: var(--rose-dark); }
+
+    /* ABOUT */
+    #about { background: var(--warm-white); }
+    .about-layout {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; margin-top: 56px;
+    }
+    .about-body p {
+      font-size: 15px; color: var(--muted); line-height: 1.9; margin-bottom: 18px;
+    }
+    .expertise-col { display: flex; flex-direction: column; gap: 32px; }
+    .exp-group {}
+    .exp-group-title {
+      font-size: 9px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--rose); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border);
+    }
+    .exp-group ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .exp-group li {
+      font-size: 13px; color: var(--muted); padding-left: 14px; position: relative; line-height: 1.6;
+    }
+    .exp-group li::before { content: '·'; position: absolute; left: 4px; color: var(--rose-light); }
+
+    /* SKILLS */
+    #skills {}
+    .skills-layout {
+      display: grid; grid-template-columns: 260px 1fr; gap: 72px; align-items: start;
+    }
+    .skills-side { position: sticky; top: 96px; }
+    .skills-side-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(26px, 2.8vw, 38px); font-weight: 400; line-height: 1.2; margin-bottom: 18px;
+    }
+    .skills-side-title em { font-style: italic; color: var(--rose-dark); }
+    .skills-side p { font-size: 13.5px; color: var(--muted); line-height: 1.8; }
+    .skill-groups { display: flex; flex-direction: column; gap: 32px; }
+    .skill-group-lbl {
+      font-size: 9px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--rose); margin-bottom: 12px; padding-bottom: 7px; border-bottom: 1px solid var(--border);
+    }
+    .pills { display: flex; flex-wrap: wrap; gap: 7px; }
+    .pill {
+      font-size: 11.5px; font-weight: 300; padding: 6px 13px;
+      background: white; border: 1px solid var(--border); color: var(--text);
+      transition: all 0.2s; cursor: default;
+    }
+    .pill:hover { background: var(--surface); border-color: var(--rose-light); color: var(--rose-dark); }
+    .pill.hi { background: var(--surface); border-color: var(--rose-light); color: var(--rose-dark); }
+
+    /* EXPERIENCE */
+    #experience { background: var(--warm-white); }
+    .exp-list { display: flex; flex-direction: column; margin-top: 56px; }
+    .exp-row {
+      display: grid; grid-template-columns: 220px 1fr;
+      gap: 48px; padding: 44px 0; border-bottom: 1px solid var(--border);
+    }
+    .exp-row:first-child { border-top: 1px solid var(--border); }
+    .exp-meta-period { font-size: 10px; letter-spacing: 1.5px; color: var(--rose); margin-bottom: 6px; }
+    .exp-meta-org {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px; font-weight: 500; line-height: 1.3; margin-bottom: 3px;
+    }
+    .exp-meta-loc { font-size: 11px; color: var(--muted); }
+    .exp-content-role {
+      font-size: 10px; font-weight: 500; letter-spacing: 2.5px; text-transform: uppercase;
+      color: var(--rose-dark); margin-bottom: 14px;
+    }
+    .exp-content-desc {
+      font-size: 14px; color: var(--muted); line-height: 1.8; margin-bottom: 0;
+    }
+
+    /* PROJECTS */
+    #projects {}
+    .proj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 56px; }
+    .proj-card {
+      background: white; border: 1px solid var(--border); padding: 36px;
+      position: relative; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .proj-card:hover { transform: translateY(-4px); box-shadow: 0 14px 36px rgba(160,93,85,0.09); }
+    .proj-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--rose), var(--sand)); transform: scaleX(0); transition: transform 0.3s;
+    }
+    .proj-card:hover::before { transform: scaleX(1); }
+    .proj-num { font-size: 9px; letter-spacing: 2px; color: var(--border); margin-bottom: 14px; }
+    .proj-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px; font-weight: 500; margin-bottom: 12px; line-height: 1.3;
+    }
+    .proj-desc { font-size: 13px; color: var(--muted); line-height: 1.75; margin-bottom: 18px; }
+    .proj-outcomes { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .proj-outcomes li { font-size: 12.5px; color: var(--muted); padding-left: 16px; position: relative; }
+    .proj-outcomes li::before { content: '→'; position: absolute; left: 0; color: var(--rose-light); font-size: 10px; top: 1px; }
+    .proj-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 18px; }
+    .proj-tag {
+      font-size: 10px; padding: 4px 10px;
+      background: var(--surface); border: 1px solid var(--rose-light);
+      color: var(--rose-dark);
+    }
+
+    /* EDUCATION */
+    #education { background: var(--surface); }
+    .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 56px; }
+    .edu-card {
+      background: white; padding: 38px; border: 1px solid var(--border);
+      position: relative; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .edu-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(160,93,85,0.09); }
+    .edu-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--rose), var(--sand));
+    }
+    .edu-uni { font-size: 10px; letter-spacing: 2px; color: var(--rose-dark); text-transform: uppercase; margin-bottom: 8px; }
+    .edu-degree {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 21px; font-weight: 500; line-height: 1.3; margin-bottom: 10px;
+    }
+    .edu-note { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+    /* TOOLS */
+    #tools {}
+    .tools-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 56px; }
+    .tool-cell {
+      background: var(--cream); padding: 28px 24px; transition: background 0.2s;
+    }
+    .tool-cell:hover { background: white; }
+    .tool-cell-lbl { font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--rose); margin-bottom: 10px; }
+    .tool-items { display: flex; flex-wrap: wrap; gap: 7px; }
+
+    /* CONTACT */
+    #contact {
+      text-align: center; padding: 116px 56px; position: relative; overflow: hidden;
+    }
+    #contact::before {
+      content: ''; position: absolute; top: -160px; left: 50%; transform: translateX(-50%);
+      width: 520px; height: 520px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,131,122,0.07) 0%, transparent 70%);
+    }
+    .contact-eyebrow { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--rose); margin-bottom: 18px; display: block; }
+    .contact-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(40px, 6vw, 72px); font-weight: 300;
+      line-height: 1.05; letter-spacing: -1px; margin-bottom: 20px;
+    }
+    .contact-title em { font-style: italic; color: var(--rose-dark); }
+    .contact-sub { font-size: 14.5px; color: var(--muted); max-width: 400px; margin: 0 auto 44px; line-height: 1.7; }
+    .contact-btns { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+    .c-btn {
+      font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+      padding: 12px 24px; border: 1px solid var(--border); color: var(--muted);
+      text-decoration: none; transition: all 0.25s;
+    }
+    .c-btn:hover { border-color: var(--rose); color: var(--rose-dark); background: var(--surface); }
+    .c-btn.primary { background: var(--rose-dark); color: white; border-color: var(--rose-dark); }
+    .c-btn.primary:hover { background: var(--terracotta); border-color: var(--terracotta); }
+
+    footer {
+      padding: 24px 56px; border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    footer span { font-size: 10px; letter-spacing: 1.5px; color: var(--muted); text-transform: uppercase; }
+    .f-dot { display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: var(--rose); margin-right: 7px; animation: pulse 2s infinite; }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.3} }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 960px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      #hero { grid-template-columns: 1fr; padding: 96px 24px 56px; gap: 40px; }
+      .hero-deco { padding: 40px 0 40px 0; min-height: 280px; }
+      .hero-deco-cards { left: 0; }
+      .hero-open-badge { bottom: 0; }
+      .section-wrap { padding: 64px 24px; }
+      .about-layout { grid-template-columns: 1fr; gap: 40px; }
+      .skills-layout { grid-template-columns: 1fr; gap: 36px; }
+      .skills-side { position: static; }
+      .exp-row { grid-template-columns: 1fr; gap: 12px; }
+      .proj-grid, .edu-grid { grid-template-columns: 1fr; }
+      .tools-grid { grid-template-columns: 1fr 1fr; }
+      #contact { padding: 72px 24px; }
+      footer { padding: 20px 24px; flex-direction: column; gap: 6px; text-align: center; }
+      .divider { padding: 0 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Portfolio</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Get in Touch</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div>
+    <div class="hero-tag">Open to new opportunities</div>
+    <h1 class="hero-headline">Flora He<br><em>Administrative &amp;<br>Digital Support</em></h1>
+    <div class="hero-name-line">Canberra, Australia</div>
+    <p class="hero-desc">
+      Administrative and digital support professional with a background in information technology, project environments and digital communication. Working at the intersection of technology, documentation and organisational support.
+    </p>
+    <div class="hero-langs">
+      <span class="lang-chip">English — Professional</span>
+      <span class="lang-chip">中文 — Native</span>
+    </div>
+    <div class="hero-btns">
+      <a href="#experience" class="btn-primary">View Experience</a>
+      <a href="#contact" class="btn-ghost">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-deco" style="opacity:0; animation: fadeIn 0.9s ease forwards 0.4s;">
+    <div class="hero-deco-name">Flora<br>He</div>
+    <div class="hero-deco-cards">
+      <div class="deco-card">
+        <div class="deco-card-icon">📋</div>
+        <div class="deco-card-text">
+          <div class="deco-card-label">Specialisation</div>
+          <div class="deco-card-value">Administrative &amp; Project Support</div>
+        </div>
+      </div>
+      <div class="deco-card">
+        <div class="deco-card-icon">💻</div>
+        <div class="deco-card-text">
+          <div class="deco-card-label">Technical Background</div>
+          <div class="deco-card-value">IT &amp; Front-End Development</div>
+        </div>
+      </div>
+      <div class="deco-card">
+        <div class="deco-card-icon">🎓</div>
+        <div class="deco-card-text">
+          <div class="deco-card-label">Education</div>
+          <div class="deco-card-value">Master of Engineering Management</div>
+        </div>
+      </div>
+      <div class="deco-card">
+        <div class="deco-card-icon">📍</div>
+        <div class="deco-card-text">
+          <div class="deco-card-label">Location</div>
+          <div class="deco-card-value">Canberra, Australia</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-open-badge">Open to Work</div>
+  </div>
+</section>
+
+<div class="divider"><div class="div-line"></div><div class="div-gem"></div><div class="div-line"></div></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-wrap">
+    <div class="reveal">
+      <div class="eyebrow">About Me</div>
+      <h2 class="s-title">My <em>Background</em></h2>
+    </div>
+    <div class="about-layout">
+      <div class="about-body reveal">
+        <p>My work focuses on supporting teams and organisations through effective information management, documentation processes and digital systems.</p>
+        <p>I have experience working in project-based environments where structured documentation, clear communication and organised records are essential for efficient operations. My background in Information Technology allows me to work comfortably with digital platforms, web technologies and technical documentation.</p>
+        <p>Alongside my technical and administrative experience, I have also developed and managed digital content platforms, producing short-form content and maintaining audience engagement.</p>
+      </div>
+      <div class="expertise-col">
+        <div class="exp-group reveal">
+          <div class="exp-group-title">Administrative &amp; Operational Support</div>
+          <ul>
+            <li>Documentation preparation and records management</li>
+            <li>Meeting coordination and administrative support</li>
+            <li>Information organisation and data management</li>
+            <li>Event and seminar coordination</li>
+          </ul>
+        </div>
+        <div class="exp-group reveal">
+          <div class="exp-group-title">Stakeholder Communication</div>
+          <ul>
+            <li>Enquiry management and information support</li>
+            <li>Business correspondence and reporting</li>
+            <li>Cross-team communication and coordination</li>
+          </ul>
+        </div>
+        <div class="exp-group reveal">
+          <div class="exp-group-title">Project Support</div>
+          <ul>
+            <li>Project documentation and reporting</li>
+            <li>Maintaining structured information repositories</li>
+            <li>Supporting project tracking and team coordination</li>
+            <li>Developing user guides and procedural documentation</li>
+          </ul>
+        </div>
+        <div class="exp-group reveal">
+          <div class="exp-group-title">Digital Communication &amp; Content</div>
+          <ul>
+            <li>Social media account management</li>
+            <li>Content creation and audience engagement</li>
+            <li>Short-form content planning and publishing</li>
+            <li>Monitoring engagement metrics</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="div-line"></div><div class="div-gem"></div><div class="div-line"></div></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-wrap">
+    <div class="skills-layout">
+      <div class="skills-side reveal">
+        <div class="eyebrow">Technical Skills</div>
+        <div class="skills-side-title">Tools &amp; <em>Platforms</em></div>
+        <p>A versatile mix of administrative, technical and digital skills built across project, development and operational environments.</p>
+      </div>
+      <div class="skill-groups">
+        <div class="reveal">
+          <div class="skill-group-lbl">Web Development</div>
+          <div class="pills">
+            <span class="pill hi">HTML</span>
+            <span class="pill hi">CSS</span>
+            <span class="pill hi">JavaScript</span>
+            <span class="pill">Front-end Interface Development</span>
+            <span class="pill">Responsive Web Layout</span>
+          </div>
+        </div>
+        <div class="reveal">
+          <div class="skill-group-lbl">Digital Platforms &amp; Tools</div>
+          <div class="pills">
+            <span class="pill hi">Microsoft Office Suite</span>
+            <span class="pill hi">SharePoint</span>
+            <span class="pill hi">Asana</span>
+            <span class="pill">Google Workspace</span>
+            <span class="pill">Digital Documentation Systems</span>
+            <span class="pill">Social Media Platforms</span>
+            <span class="pill">Basic Website CMS</span>
+          </div>
+        </div>
+        <div class="reveal">
+          <div class="skill-group-lbl">Administrative Skills</div>
+          <div class="pills">
+            <span class="pill hi">Records Management</span>
+            <span class="pill hi">Document Control</span>
+            <span class="pill">Meeting Coordination</span>
+            <span class="pill">Data Entry &amp; Reporting</span>
+            <span class="pill">Business Correspondence</span>
+            <span class="pill">Stakeholder Communication</span>
+          </div>
+        </div>
+        <div class="reveal">
+          <div class="skill-group-lbl">Technical Support</div>
+          <div class="pills">
+            <span class="pill">Basic Technical Troubleshooting</span>
+            <span class="pill">System Documentation</span>
+            <span class="pill">User Guidance</span>
+            <span class="pill">Digital Platform Support</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="div-line"></div><div class="div-gem"></div><div class="div-line"></div></div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-wrap">
+    <div class="reveal">
+      <div class="eyebrow">Career History</div>
+      <h2 class="s-title">Professional <em>Experience</em></h2>
+    </div>
+    <div class="exp-list">
+
+      <div class="exp-row reveal">
+        <div>
+          <div class="exp-meta-period">2023 – Present</div>
+          <div class="exp-meta-org">Self-Employed</div>
+          <div class="exp-meta-loc">Australia</div>
+        </div>
+        <div>
+          <div class="exp-content-role">Digital Information Support</div>
+          <p class="exp-content-desc">Provide digital communication and information support by responding to enquiries, organising information resources and maintaining structured records of frequently requested information. This role involves managing communication workflows and maintaining organised documentation systems.</p>
+        </div>
+      </div>
+
+      <div class="exp-row reveal">
+        <div>
+          <div class="exp-meta-period">2021 – 2023</div>
+          <div class="exp-meta-org">K2L</div>
+          <div class="exp-meta-loc">Canberra, ACT</div>
+        </div>
+        <div>
+          <div class="exp-content-role">Front-End Developer – Project Support</div>
+          <p class="exp-content-desc">Worked within a project environment supporting both technical and documentation activities. Responsibilities included developing front-end interfaces using HTML, CSS and JavaScript, preparing project documentation, maintaining structured information repositories in SharePoint and supporting team communication and stakeholder enquiries.</p>
+        </div>
+      </div>
+
+      <div class="exp-row reveal">
+        <div>
+          <div class="exp-meta-period">2021</div>
+          <div class="exp-meta-org">ACS Program</div>
+          <div class="exp-meta-loc">Australia</div>
+        </div>
+        <div>
+          <div class="exp-content-role">Project Support</div>
+          <p class="exp-content-desc">Supported project coordination activities including documentation management, preparation of user manuals and maintaining records of project decisions, issues and communication history. Assisted with tracking project activities and supporting internal reporting processes.</p>
+        </div>
+      </div>
+
+      <div class="exp-row reveal">
+        <div>
+          <div class="exp-meta-period">2018</div>
+          <div class="exp-meta-org">Macquarie University &amp; Suncorp</div>
+          <div class="exp-meta-loc">Graduate Project</div>
+        </div>
+        <div>
+          <div class="exp-content-role">Project Support – Graduate Project</div>
+          <p class="exp-content-desc">Participated in a university–industry collaboration project focused on developing a travel planning application. Contributed to testing, documentation and project reporting while working with stakeholders to improve usability and support project delivery.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="div-line"></div><div class="div-gem"></div><div class="div-line"></div></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-wrap">
+    <div class="reveal">
+      <div class="eyebrow">Portfolio</div>
+      <h2 class="s-title">Projects &amp; <em>Highlights</em></h2>
+    </div>
+    <div class="proj-grid">
+      <div class="proj-card reveal">
+        <div class="proj-num">// 01</div>
+        <div class="proj-title">Social Media Content Platform</div>
+        <p class="proj-desc">Developed and managed a digital content account focused on short-form media, growing an engaged audience through consistent content creation and strategic planning.</p>
+        <ul class="proj-outcomes">
+          <li>Built an audience of 5,000+ followers</li>
+          <li>Generated 30,000+ likes through content engagement</li>
+          <li>Produced and published short-form digital content</li>
+          <li>Monitored engagement analytics to guide content direction</li>
+        </ul>
+        <div class="proj-tags">
+          <span class="proj-tag">Content Creation</span>
+          <span class="proj-tag">Audience Growth</span>
+          <span class="proj-tag">Analytics</span>
+          <span class="proj-tag">Digital Media</span>
+        </div>
+      </div>
+      <div class="proj-card reveal">
+        <div class="proj-num">// 02</div>
+        <div class="proj-title">Travel Planning Application</div>
+        <p class="proj-desc">University–industry collaboration with Suncorp focused on developing a travel planning platform. Contributed across documentation, testing and stakeholder communication throughout the project lifecycle.</p>
+        <ul class="proj-outcomes">
+          <li>Contributed to usability testing and system feedback</li>
+          <li>Prepared project documentation and reporting</li>
+          <li>Collaborated with stakeholders to improve functionality</li>
+        </ul>
+        <div class="proj-tags">
+          <span class="proj-tag">Project Support</span>
+          <span class="proj-tag">Documentation</span>
+          <span class="proj-tag">Usability Testing</span>
+          <span class="proj-tag">Stakeholder Communication</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="div-line"></div><div class="div-gem"></div><div class="div-line"></div></div>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-wrap">
+    <div class="reveal">
+      <div class="eyebrow">Academic Background</div>
+      <h2 class="s-title"><em>Education</em></h2>
+    </div>
+    <div class="edu-grid">
+      <div class="edu-card reveal">
+        <div class="edu-uni">University of Technology Sydney</div>
+        <div class="edu-degree">Master of Engineering Management</div>
+        <div class="edu-note">Advanced expertise in project management, systems thinking and engineering leadership within technical environments.</div>
+      </div>
+      <div class="edu-card reveal">
+        <div class="edu-uni">Macquarie University</div>
+        <div class="edu-degree">Bachelor of Information Technology</div>
+        <div class="edu-note">Strong foundation in digital systems, software development and information management across technical and project environments.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <span class="contact-eyebrow reveal">Let's Connect</span>
+  <h2 class="contact-title reveal">Open to <em>New<br>Opportunities</em></h2>
+  <p class="contact-sub reveal">Available for administrative, project support, IT or digital coordination roles. Based in Canberra — open to remote opportunities.</p>
+  <div class="contact-btns reveal">
+    <a href="mailto:your@email.com" class="c-btn primary">Email Me</a>
+    <a href="resume.pdf" class="c-btn">Download CV</a>
+  </div>
+</section>
+
+<footer>
+  <span><span class="f-dot"></span>Open to Work · Canberra, AU</span>
+  <span>Administrative &amp; Digital Support Professional</span>
+  <span>© 2026</span>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 75);
+    });
+  }, { threshold: 0.07 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
