@@ -49,23 +49,28 @@
       border-bottom: 1px solid var(--border);
     }
 
-    /* HERO PHOTO */
-    .hero-photo-wrap {
+    /* HERO DECO BOX */
+    .hero-deco-wrap {
       display: flex; align-items: center; justify-content: center;
       padding: 24px 0 24px 48px;
     }
-    .hero-photo-frame {
+    .hero-deco-box {
       position: relative;
-      width: 340px; max-width: 100%;
-    }
-    .hero-photo-img {
-      width: 100%;
-      aspect-ratio: 3/4;
-      object-fit: cover;
-      object-position: top center;
-      display: block;
+      width: 320px; height: 380px;
+      background: var(--surface);
       border: 1px solid var(--border);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 24px;
     }
+    .hero-deco-initial {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 96px; font-weight: 300; font-style: italic;
+      color: var(--rose); opacity: 0.35; line-height: 1;
+      letter-spacing: -4px;
+    }
+    .hero-deco-lines { display: flex; flex-direction: column; gap: 8px; align-items: center; }
+    .hero-deco-line { width: 60px; height: 1px; background: var(--rose-light); }
+    .hero-deco-line.short { width: 30px; }
     .hero-open-badge {
       position: absolute; bottom: -14px; right: -14px;
       background: var(--rose-dark); color: white;
@@ -336,9 +341,8 @@
       nav { padding: 16px 24px; }
       .nav-links { display: none; }
       #hero { grid-template-columns: 1fr; padding: 96px 24px 56px; gap: 40px; }
-      .hero-photo-wrap { padding: 20px 0 20px 0; }
-      .hero-photo-frame { width: 260px; }
-      .hero-open-badge { bottom: -12px; right: -8px; }
+      .hero-deco-wrap { padding: 20px 0; }
+      .hero-deco-box { width: 260px; height: 300px; }
       .section-wrap { padding: 64px 24px; }
       .about-layout { grid-template-columns: 1fr; gap: 40px; }
       .skills-layout { grid-template-columns: 1fr; gap: 36px; }
@@ -385,9 +389,14 @@
       <a href="#contact" class="btn-ghost">Get in Touch</a>
     </div>
   </div>
-  <div class="hero-photo-wrap" style="opacity:0; animation: fadeIn 0.9s ease forwards 0.4s;">
-    <div class="hero-photo-frame">
-      <img src="photo.jpg" alt="Flora He" class="hero-photo-img" onerror="this.style.background='#f5ede6';this.style.display='block'">
+  <div class="hero-deco-wrap" style="opacity:0; animation: fadeIn 0.9s ease forwards 0.4s;">
+    <div class="hero-deco-box">
+      <div class="hero-deco-initial">FH</div>
+      <div class="hero-deco-lines">
+        <div class="hero-deco-line"></div>
+        <div class="hero-deco-line short"></div>
+        <div class="hero-deco-line"></div>
+      </div>
       <div class="hero-open-badge">Open to Work</div>
     </div>
   </div>
@@ -526,7 +535,7 @@
           <div class="exp-meta-loc">Australia</div>
         </div>
         <div>
-          <div class="exp-content-role">Digital Content Creator</div>
+          <div class="exp-content-role">Digital Information Support</div>
           <p class="exp-content-desc">Provide digital communication and information support by responding to enquiries, organising information resources and maintaining structured records of frequently requested information. This role involves managing communication workflows and maintaining organised documentation systems.</p>
         </div>
       </div>
@@ -648,7 +657,7 @@
   <h2 class="contact-title reveal">Open to <em>New<br>Opportunities</em></h2>
   <p class="contact-sub reveal">Available for administrative, project support, IT or digital coordination roles. Based in Canberra — open to remote opportunities.</p>
   <div class="contact-btns reveal">
-    <a href="mailto:flora.shuohe@gmail.com" class="c-btn primary">Email Me</a>
+    <a href="/cdn-cgi/l/email-protection#52343e3d20337c213a273d3a3712353f333b3e7c313d3f" class="c-btn primary">Email Me</a>
     <a href="resume.pdf" class="c-btn" download>Download CV</a>
   </div>
 </section>
@@ -659,7 +668,7 @@
   <span>© 2026</span>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   const obs = new IntersectionObserver((entries) => {
     entries.forEach((e, i) => {
       if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), 120 * i);
